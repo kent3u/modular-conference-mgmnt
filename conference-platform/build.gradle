@@ -8,14 +8,13 @@ group = 'ee.jackaltech'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
-    mavenCentral()  // Ensure this is included in your submodule's build.gradle
+    mavenCentral()
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.liquibase:liquibase-core'
     runtimeOnly 'org.postgresql:postgresql'
-//    testImplementation project(':shared-test')
 }
 
 tasks.register('testJar', Jar) {
