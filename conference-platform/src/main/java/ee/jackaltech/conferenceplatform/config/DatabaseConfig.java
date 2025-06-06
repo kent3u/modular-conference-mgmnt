@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 @Configuration
 class DatabaseConfig {
 
-    @Value("${liquibase.enabled:true}")
+    @Value("${spring.liquibase.enabled}")
     private boolean liquibaseEnabled;
 
     @Bean

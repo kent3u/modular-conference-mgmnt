@@ -7,7 +7,7 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
   liquibase:
-    enabled: true
+    enabled: false
 logging:
   level:
     org:
