@@ -1,0 +1,5 @@
+rootProject.name = 'modular-conference-mgmnt'
+
+include 'back-office-gateway', 'conference-platform'
+include 'conference-gateway'
+

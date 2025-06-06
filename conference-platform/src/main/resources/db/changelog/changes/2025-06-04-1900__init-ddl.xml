@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="init_conference_room" author="kent">
+        <sql>
+            CREATE TABLE conference_room
+            (
+                id       UUID PRIMARY KEY,
+                name     VARCHAR(255)     NOT NULL,
+                status   VARCHAR(50)      NOT NULL,
+                location VARCHAR(255)     NOT NULL,
+                capacity INTEGER
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="init_conference" author="kent">
+        <sql>
+            CREATE TABLE conference
+            (
+                id                 UUID PRIMARY KEY,
+                conference_room_id UUID             NOT NULL REFERENCES conference_room (id),
+                start_time         TIMESTAMP(0)     NOT NULL,
+                end_time           TIMESTAMP(0)     NOT NULL,
+                deleted_at         TIMESTAMP(0)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="init_participant" author="kent">
+        <sql>
+            CREATE TABLE participant
+            (
+                id            UUID PRIMARY KEY,
+                email         VARCHAR(255) NOT NULL,
+                gender        INTEGER      NOT NULL,
+                first_name    VARCHAR(100) NOT NULL,
+                last_name     VARCHAR(100) NOT NULL,
+                date_of_birth DATE         NOT NULL
+            );
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="init_feedback" author="kent">
+        <sql>
+            CREATE TABLE feedback
+            (
+                id             UUID PRIMARY KEY,
+                conference_id  UUID             NOT NULL REFERENCES conference (id),
+                participant_id UUID             NOT NULL REFERENCES participant (id),
+                feedback       VARCHAR(4000)    NOT NULL
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="init_registration" author="kent">
+        <sql>
+            CREATE TABLE registration
+            (
+                id                          UUID PRIMARY KEY,
+                conference_participant_code VARCHAR(255) NOT NULL,
+                conference_id               UUID         NOT NULL REFERENCES conference (id),
+                participant_id              UUID         NOT NULL REFERENCES participant (id),
+                deleted_at                  TIMESTAMP(0)
+            );
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

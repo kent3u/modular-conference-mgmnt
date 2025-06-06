@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: back-office-gateway
+  datasource:
+    url: jdbc:postgresql://db:5432/conferencedb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    enabled: true
+logging:
+  level:
+    org:
+      springframework:
+        web: TRACE
